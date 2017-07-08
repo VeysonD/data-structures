@@ -17,7 +17,7 @@ var LinkedList = function() {
     }
     list.tail = newNode;
     //console.log(list);
-    console.log('done');
+    //console.log('done');
 
   };
 

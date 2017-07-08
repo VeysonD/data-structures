@@ -2,10 +2,31 @@
 
 // Instantiate a new graph
 var Graph = function() {
+  //this.graphObj = {}
+  this.nodeArray = [];
 };
+
+/*
+var undirectedG = {
+  Node1: ["Node2", "Node3"],
+  Node2: ["Node1"],
+  Node3: ["Node3"]
+};
+
+
+*/
+//
+
 
 // Add a node to the graph, passing in the node's value.
 Graph.prototype.addNode = function(node) {
+  var graphObj = new Graph();
+  graphObj.nodeArray.push(node);
+  console.log(graphObj)
+  //this.graphObj.push(x.value);
+  //console.log(this.graphObj);
+
+  //console.log(node);
 };
 
 // Return a boolean value indicating if the value passed to contains is represented in the graph.
@@ -35,5 +56,3 @@ Graph.prototype.forEachNode = function(cb) {
 /*
  * Complexity: What is the time complexity of the above functions?
  */
-
-

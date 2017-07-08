@@ -41,4 +41,22 @@ describe('tree', function() {
     expect(tree.contains(8)).to.equal(true);
   });
 
+  it('should', function () {
+    tree.addChild(1);
+    tree.addChild(2);
+    tree.children[0].addChild(3);
+    tree.children[0].addChild(4);
+    tree.children[1].addChild(5);
+    tree.children[1].addChild(6);
+    tree.children[0].children[0].addChild(7);
+    tree.children[0].children[1].addChild(8);
+    tree.children[1].children[0].addChild(9);
+    tree.children[1].children[1].addChild(10);
+    expect(tree.contains(6)).to.equal(true);
+    expect(tree.contains(7)).to.equal(true);
+    expect(tree.contains(8)).to.equal(true);
+    expect(tree.contains(10)).to.equal(true);
+    expect(tree.contains(11)).to.equal(false);
+  })
+
 });

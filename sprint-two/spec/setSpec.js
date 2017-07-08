@@ -23,5 +23,10 @@ describe('set', function() {
     set.remove('Mel Gibson');
     expect(set.contains('Mel Gibson')).to.equal(false);
   });
-
+  it('should store unique values', function() {
+    set.add('Gregory Peck');
+    set.add('Gregory Peck');
+    set.remove('Gregory Peck');
+    expect(set.contains('Gregory Peck')).to.equal(false);
+  })
 });
