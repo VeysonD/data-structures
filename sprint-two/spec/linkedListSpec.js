@@ -50,6 +50,17 @@ describe('linkedList', function() {
     linkedList.removeHead();
     expect(linkedList.contains(4)).to.equal(false);
   });
+  
+  it('should contain a value that was added in a HEUG list', function () {
+  linkedList.addToTail(1);
+  linkedList.addToTail(2);
+  linkedList.addToTail(3);
+  linkedList.addToTail(4);
+  linkedList.addToTail(5);
+  expect(linkedList.contains(4)).to.equal(true);
+  expect(linkedList.contains(5)).to.equal(true);
+  expect(linkedList.contains(6)).to.equal(false)
+})
 
   // add more tests here to test the functionality of linkedList
 });
