@@ -28,11 +28,15 @@ var LinkedList = function() {
   };
 
   list.contains = function(target) {
-    if (list.head.value === target) {
+    if (list.head.value === target || list.tail.value === target) {
       return true;
     }
-    if (list.tail.value === target) {
-      return true;
+    var currentList = list.head.next;
+    while (currentList) {
+      if (currentList.value === target) {
+        return true
+      }
+      currentList = currentList.next;
     }
     return false;
   };
