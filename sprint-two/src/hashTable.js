@@ -20,7 +20,6 @@ HashTable.prototype.insert = function(k, v) {
       //storage.set(bucket)
   var bucket;
   var storage = this._storage.get(index);
-  console.log(storage);
   if (!storage) {
     bucket = [[k, v]]
     this._storage.set(index, bucket);
