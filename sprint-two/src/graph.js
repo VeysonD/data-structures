@@ -57,6 +57,8 @@ Graph.prototype.removeEdge = function(fromNode, toNode) {
   if (fromNodeIndex && toNodeIndex) {
     nodes[fromNode].splice(toNodeIndex, 1);
     nodes[toNode].splice(fromNodeIndex, 1);
+  } else {
+    return undefined;
   }
 };
 
@@ -70,4 +72,11 @@ Graph.prototype.forEachNode = function(cb) {
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ addNode is constant
+ contains is constant
+ removeNode is usually linear
+ hasEdge is constant
+ addEdge is constant
+ removeEdge is constant
+ forEachNode is linear
  */
