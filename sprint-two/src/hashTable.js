@@ -6,24 +6,52 @@ var HashTable = function() {
 };
 
 HashTable.prototype.insert = function(k, v) {
-  //console.log(this);
   var index = getIndexBelowMaxForKey(k, this._limit);
-  var holder = this._storage.get(index)
-
-  if (holder === undefined) {
-    var bucket = [k, v]
+  //storage is a limited array
+  //make a bucket that contains the k and v (tuple);
+  //store the bucket at storage in the storage array at index (from line 9);
+  //multiple tuples stored in a bucket produces a collision (maybe).  STOP THIS.
+    //What is the difference between wanting to replace a value at a key and making a whole new key/value?
+    //iterate over the entire storage and check every key at position === 0
+      //check to see if the k === storage[i][0] //this case is to overwrite a key
+        //then storage[i][1] = v;
+    //else //want to do this outside the loop
+      //make a new bucket
+      //storage.set(bucket)
+  var bucket;
+  var storage = this._storage.get(index);
+  console.log(storage);
+  if (!storage) {
+    bucket = [[k, v]]
     this._storage.set(index, bucket);
   } else {
-    holder[1] = v;
+    bucket = [];
+    var bucketExists = false
+    for (var i = 0; i < storage.length; i += 1) {
+      bucket.push(storage[i])
+      if (storage[i][0] === k) {
+        storage[i][1] = v;
+        bucketExists = true;
+      }
+    }
+    if (!bucketExists) {
+      bucket.push([k, v]);
+      this._storage.set(index, bucket);
+    }
   }
-  console.log('done');
 };
 
 HashTable.prototype.retrieve = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
-  var holder = this._storage.get(index);
-  if (holder) {
-    return holder[1];
+  var storage = this._storage.get(index);
+  if (storage[0]) {
+    var retrieveValue;
+    for (var i = 0; i < storage.length; i += 1) {
+      if (storage[i][0] === k) {
+        retrieveValue = storage[i][1];
+      }
+    }
+    return retrieveValue;
   } else {
     return undefined;
   }
@@ -31,11 +59,21 @@ HashTable.prototype.retrieve = function(k) {
 
 HashTable.prototype.remove = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
-  this._storage.set(index, undefined);
+  var storage = this._storage.get(index);
+  var removeAtIndex;
+  for (var i = 0; i < storage.length; i += 1) {
+    if (storage[i][0] === k) {
+      removeAtIndex = i;
+    }
+  }
+  storage[removeAtIndex] = undefined;;
 };
 
 
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ Insert is usually constant, but can be linear if unlucky.
+ Retrieve is usually constant, but can be linear if unlucky.
+ Remove is usually constant but cant be linear if unlucky.
  */
